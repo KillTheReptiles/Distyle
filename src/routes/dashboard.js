@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
+
+
 const pool = require('../database');
 const {isLoggedIn, isNotLoggedIn} = require('../lib/auth');
 
 router.get('/dashboard', isLoggedIn, async(req, res) => {
     const users = await pool.query('SELECT * FROM users');// It send to the list and create an array with the links
-    console.log(users)
     res.render('dashboard/users/list',{users});
 });
 
@@ -28,6 +29,13 @@ router.post('/dashboard/edit/:id', isLoggedIn, async (req, res) => {
     };
     await pool.query('UPDATE users set ? WHERE id = ?', [editUser, id]);
     req.flash('success', 'User updated successfully');
+    res.redirect('/dashboard');
+});
+
+router.get('/delete/:id',isLoggedIn, async (req, res) => {
+    const { id } = req.params;
+    await pool.query('DELETE FROM users WHERE ID = ?', [id]);
+    req.flash('success', 'User deleted successfully');
     res.redirect('/dashboard');
 });
 
