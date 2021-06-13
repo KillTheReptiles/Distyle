@@ -1,15 +1,16 @@
-USE db_links;
+USE distyle;
 
 -- TABLE USER
 -- all pasword wil be encrypted using SHA1
 CREATE TABLE users (
   id INT(11) NOT NULL,
   email VARCHAR(150) NOT NULL,
-  username VARCHAR(16) NOT NULL,
+  username VARCHAR(16),
   password VARCHAR(60) NOT NULL,
   fullname VARCHAR(100) NOT NULL,
   role VARCHAR(20),
-  logo VARCHAR(100)
+  logo VARCHAR(100),
+  status VARCHAR(30)
 );
 
 ALTER TABLE users
@@ -18,6 +19,8 @@ ALTER TABLE users
 ALTER TABLE users
   MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 1;
 
+ALTER TABLE users
+	ADD created_at timestamp NOT NULL DEFAULT current_timestamp;
 DESCRIBE users;
 
 SELECT * FROM users;
@@ -39,6 +42,7 @@ ALTER TABLE links
 ALTER TABLE links
   MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 2;
 
+	
 DESCRIBE links;
 
 
