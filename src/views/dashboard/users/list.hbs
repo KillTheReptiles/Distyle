@@ -1,28 +1,237 @@
-<div class="container p-4">
-    <div class="row">
-        {{#each users}}
-        <div class="col-md-5">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h3 class="card-title text-uppercase">
-                        {{username}}
-                    </h3>
-                    <p class="m-2">{{fullname}}</p>
-                    <h9>{{email}}</h1>
-                    <p>{{timeago created_at}}</p>
-                    <a href="/dashboard/delete/{{id}}" class="btn btn-danger disabled" >Delete Link</a>
-                    <a href="dashboard/edit/{{id}}" class="btn btn-secondary">Edit</a>
-
-                </div>
-            </div>
-        </div>
-        {{else}}
-        <div class="col-md-4 mx-auto">
-            <div class="card card-body text-center">
-                <p>There are not links saved yet.</p>
-                <a href="/links/add">Create One!</a>
-            </div>
-        </div>
-        {{/each}}
+<div class="container justify-content-center">
+    <div class="row justify-content-center">
+        <li>
+            <button type="button" class="btn btn-outline-primary">
+                <a href="/dashboard/users/add/"> ADD</a>
+            </button>
+        </li>
     </div>
 </div>
+<div class="datatable-container">
+    <table id="users-table" class="datatable">
+
+        <thead>
+
+            <tr id="table-header" class="">
+                <th>STATUS</th>
+                <th data-priority="1">ID</th>
+                <th data-priority="2">USERNAME</th>
+                <th data-priority="3">FULL NAME</th>
+                <th data-priority="4">EMAIL</th>
+                <th data-priority="5">ACTIONS</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each users}}
+            <tr>
+                <td><span class="{{status}}"></span></td>
+                <td>
+                    {{id}}
+                </td>
+                <td>
+                    {{username}}
+                </td>
+                <td>
+                    {{fullname}}
+                </td>
+                <td>
+                    {{email}}
+                </td>
+                <td>
+                    <div class="header-tools">
+                        <div class="tools">
+                            <ul>
+                                <li>
+                                    <button data-bs-toggle="modal" data-bs-target="#">
+                                        <a class="material-icons" href="/dashboard/users/edit/{{id}}">edit</a>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button>
+                                        <a class="material-icons " href="/dashboard/users/delete/{{id}}">delete</a>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+{{!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/dashboard/users/edit/{{user.id}}" method="POST">
+                    <div class="form-group">
+                        <input type="text" value="{{user.fullname}}" class="form-control" name="fullname"
+                            placeholder="Full Name" autofocus>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" value="{{user.username}}" class="form-control" name="username"
+                            placeholder="User Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" value="{{user.email}}" class="form-control" name="email"
+                            aria-describedby="emailHelp" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" value="{{user.role}}" class="form-control" name="role" placeholder="Role">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" value="{{user.status}}" class="form-control" name="status"
+                            placeholder="Status">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success btn-block">
+                            Send
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div> --}}
+
+<!-- Optional JavaScript -->
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+<!--    Datatables-->
+<script src="http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.foundation.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#users-table').DataTable();
+    });
+</script>
+
+
+
+{{!-- <div class="header-tools">
+    <div class="tools">
+        <ul>
+            <li><span><input type="checkbox"></span></li>
+
+        </ul>
+    </div>
+
+    <div class="search">
+        <input type="text" name="" id="" class="search-input">
+    </div>
+</div> --}}
+
+{{!-- <div class="footer-tools">
+    <div class="list-items">
+        Show
+        <select name="n-entries" id="n-entries" class="n-entries">
+            <option value="5">5</option>
+            <option value="10" selected>10</option>
+            <option value="15">15</option>
+        </select>
+        entries
+    </div>
+    <div class="pages">
+        <ul>
+            <li><span class="active">1</span></li>
+            <li><button>2</button></li>
+            <li><button>3</button></li>
+            <li><button>4</button></li>
+            <li><span>...</span></li>
+            <li><button>9</button></li>
+            <li><button>10</button></li>
+        </ul>
+    </div>
+</div>
+</div> --}}
+
+
+
+
+{{!-- <div class="container p-4">
+    <div>
+        <div class="row">
+            <div class="col">
+                <table id="users-table" class="stripe hover"
+                    style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+                    <thead>
+                        <tr id="table-header" class="">
+                            <th data-priority="1">id</th>
+                            <th data-priority="2">username</th>
+                            <th data-priority="3">fullname</th>
+                            <th data-priority="4">email</th>
+                        </tr>
+                        {{#each users}}
+                        <tr>
+
+                            <td>
+                                {{id}}
+                            </td>
+                            <td>
+                                {{username}}
+                            </td>
+                            <td>
+                                {{fullname}}
+                            </td>
+                            <td>
+                                {{email}}
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    {{#each users}}
+    <div class="col-md-12">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="card-title text-uppercase">
+                    {{username}}
+                </h3>
+                <p class="m-2">{{fullname}}</p>
+                <h9>{{email}}</h1>
+                    <p>{{timeago created_at}}</p>
+                    <a href="/dashboard/delete/{{id}}" class="btn btn-danger disabled">Delete Link</a>
+                    <a href="dashboard/edit/{{id}}" class="btn btn-secondary">Edit</a>
+
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <div class="col-md-4 mx-auto">
+        <div class="card card-body text-center">
+            <p>There are not links saved yet.</p>
+            <a href="/links/add">Create One!</a>
+        </div>
+    </div>
+    {{/each}}
+</div>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+<script src="http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer></script>
+
+<script>
+    $('#users-table').DataTable();
+</script> --}}

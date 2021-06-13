@@ -9,6 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
         {{#if user}}
+        {{#ifCond user.role 'client'}}
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -32,14 +33,23 @@
         <li class="nav-item">
           <a href="/profile" class="nav-link">Profile</a>
         </li>
+        {{/ifCond}}
+
+        {{#ifCond user.role 'admin'}}
         <li class="nav-item">
-          <a href="/logout" class="nav-link">Logout</a>
+          <a class="nav-link" href="/dashboard/users">Users</a>
         </li>
+        {{/ifCond}}
+        {{!-- This is the logout for all users --}}
+         <li class="nav-item">
+          <a href="/logout" class="nav-link">Logout</a> 
+        </li>
+        {{!-- --------------- --}}
         {{else}}
         <li class="nav-item">
           <a href="/signin" class="nav-link">Sign In</a>
         </li>
-         <li class="nav-item">
+        <li class="nav-item">
           <a href="/signup" class="nav-link">Sign Up</a>
         </li>
         {{/if}}
@@ -47,3 +57,4 @@
     </div>
   </div>
 </nav>
+
