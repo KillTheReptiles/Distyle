@@ -183,7 +183,7 @@
 }
 
 .datatable-container .datatable tbody tr .suspended::after{
-    content: 'SuspendedK';
+    content: 'Suspended';
     color: var(--dt-status-avaible-color);
 }
 
