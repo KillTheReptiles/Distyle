@@ -28,5 +28,13 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KillTheReptiles/Distyle.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KillTheReptiles/Distyle/issues"
+  },
+  "homepage": "https://github.com/KillTheReptiles/Distyle#readme"
 }
