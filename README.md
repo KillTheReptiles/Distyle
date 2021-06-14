@@ -5,6 +5,8 @@
 - Contact us
 
 ### What is Distyle?
+We are a music distributor (under construction).
+We will help small artist to make themself known across all plataforms.
 
 ### Want to help us depevelop?
 You can clone this repo locally with ``git clone``
@@ -18,3 +20,5 @@ You can clone this repo locally with ``git clone``
 When you have some changes that help us improve you can open a Pull Request in the repository.
 
 ### Contact us
+- [Angela Remolina](mailto:angelasofiaremolinagutierrez@gmail.com)
+- [Duvan Diaz](mailto:andresdiaz2277@gmail.com)
