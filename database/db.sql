@@ -27,7 +27,7 @@ SELECT * FROM users;
 
 -- LINKS TABLE
 CREATE TABLE links (
-  id INT(11) NOT NULL,
+  id INT NOT NULL,
   title VARCHAR(150) NOT NULL,
   url VARCHAR(255) NOT NULL,
   description TEXT,
@@ -36,13 +36,30 @@ CREATE TABLE links (
   CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
+-- RELEASES TABLE
+CREATE TABLE releases (
+  id INT NOT NULL,
+  release_type VARCHAR(10),
+  title VARCHAR(150) NOT NULL,
+  artists VARCHAR(150) NOT NULL,
+  genre VARCHAR(90),
+  user_id INT,
+  created_at timestamp NOT NULL DEFAULT current_timestamp,
+  CONSTRAINT fk_user_releases FOREIGN KEY(user_id) REFERENCES users(id)
+);
+
+ALTER TABLE releases ADD CONSTRAINT ck_release_type
+   check (release_type in ('EP', 'Single', 'Album'));
+
 ALTER TABLE links
   ADD PRIMARY KEY (id);
 
 ALTER TABLE links
-  MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 2;
+  MODIFY id INT NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 2;
 
-	
+ALTER TABLE releases
+  MODIFY id INT NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 2;
+
 DESCRIBE links;
 
 
