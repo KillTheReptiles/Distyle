@@ -29,14 +29,15 @@ router.post('/add', isLoggedIn, async (req, res) => {
     res.redirect('/releases');
 });
 
-//TODO 
 
-// router.get('/delete/:id',isLoggedIn, async (req, res) => {
-//     const { id } = req.params;
-//     await pool.query('DELETE FROM links WHERE ID = ?', [id]);
-//     req.flash('success', 'Link deleted successfully');
-//     res.redirect('/links');
-// });
+router.get('/delete/:id',isLoggedIn, async (req, res) => {
+    const { id } = req.params;
+    await pool.query('DELETE FROM releases WHERE ID = ?', [id]);
+    req.flash('success', 'Release deleted successfully');
+    res.redirect('/releases');
+});
+
+//TODO 
 
 // router.get('/edit/:id',isLoggedIn, async (req, res) => {
 //     const { id } = req.params;
