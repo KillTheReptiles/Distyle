@@ -7,23 +7,27 @@ const {isLoggedIn} = require('../lib/auth')
 
 
 router.get('/', isLoggedIn, async (req, res) => {
-    const links = await pool.query('SELECT * FROM releases WHERE user_id = ?', [req.user.id]);
-    res.render('releases/list');//, { releases });// It send to the list and create an array with the releases
+    const releases = await pool.query('SELECT * FROM releases WHERE user_id = ?', [req.user.id]);
+    res.render('releases/list', { releases });// It send to the list and create an array with the releases
 });
 
-// router.get('/add', isLoggedIn, (req, res) => {
-//     res.render('releases/add');
-// });
+router.get('/add', isLoggedIn, (req, res) => {
+    res.render('releases/add');
+});
 
-// router.post('/add', isLoggedIn, async (req, res) => {
-//     const { title, url, description } = req.body;
-//     const newRelease = {
-//         //add info to ask 
-//     };
-//     await pool.query('INSERT INTO releases set ?', [newRelease]);
-//     req.flash('success', 'Released saved successfully');
-//     res.redirect('/links');
-// });
+router.post('/add', isLoggedIn, async (req, res) => {
+    const { release_type, title, artists, genre  } = req.body;
+    const newRelease = {
+        release_type,
+        title,
+        artists,
+        genre,
+        user_id:req.user.id,
+    };
+    await pool.query('INSERT INTO releases set ?', [newRelease]);
+    req.flash('success', 'Released saved successfully');
+    res.redirect('/releases');
+});
 
 //TODO 
 
