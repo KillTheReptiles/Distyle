@@ -37,25 +37,25 @@ router.get('/delete/:id',isLoggedIn, async (req, res) => {
     res.redirect('/releases');
 });
 
-//TODO 
+router.get('/edit/:id',isLoggedIn, async (req, res) => {
+    const { id } = req.params;
+    const releases = await pool.query('SELECT * FROM releases WHERE id = ?', [id]);
+    res.render('releases/edit', { release: releases[0] });
+});
 
-// router.get('/edit/:id',isLoggedIn, async (req, res) => {
-//     const { id } = req.params;
-//     const links = await pool.query('SELECT * FROM links WHERE id = ?', [id]);
-//     res.render('links/edit', { link: links[0] });
-// });
-
-// router.post('/edit/:id', isLoggedIn, async (req, res) => {
-//     const { id } = req.params;
-//     const { title, url, description } = req.body;
-//     const newLink = {
-//         title,
-//         url,
-//         description
-//     };
-//     await pool.query('UPDATE links set ? WHERE id = ?', [newLink, id]);
-//     req.flash('success', 'Link updated successfully');
-//     res.redirect('/links');
-// });
+router.post('/edit/:id', isLoggedIn, async (req, res) => {
+    const { id } = req.params;
+    const { release_type, title, artists, genre  } = req.body;
+    const newRelease = {
+        release_type,
+        title,
+        artists,
+        genre,
+        user_id:req.user.id,
+    };
+    await pool.query('UPDATE releases set ? WHERE id = ?', [newRelease, id]);
+    req.flash('success', 'Release updated successfully');
+    res.redirect('/releases');
+});
 
 module.exports = router;
