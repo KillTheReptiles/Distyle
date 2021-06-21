@@ -4,8 +4,15 @@ const router = express.Router();
 const pool = require('../database');
 const {isLoggedIn, isNotLoggedIn} = require('../lib/auth');
 
+//Only Dahsboard
+router.get('/dashboard', isLoggedIn, async(req, res) => {
+    res.render('dashboard/dashboard');
+});
+
+//Dahsboard users
+
 router.get('/dashboard/users', isLoggedIn, async(req, res) => {
-    const users = await pool.query('SELECT * FROM users');// It send to the list and create an array with the links
+    const users = await pool.query('SELECT * FROM users');// It send to the list and create an array with the users
     res.render('dashboard/users/list',{ users: users});
 });
 
