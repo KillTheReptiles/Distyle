@@ -17,7 +17,7 @@ router.get('/signup', isNotLoggedIn,(req, res) => {
 // });
 
 router.post('/signup', isNotLoggedIn, passport.authenticate('local.signup', {
-    successRedirect: '/profile',
+    successRedirect: '/dashboard',
     failureRedirect: '/signup',
     failureFlash: true
 }));
@@ -28,15 +28,12 @@ router.get('/signin', isNotLoggedIn, (req, res) => {
 
 router.post('/signin', isNotLoggedIn,(req, res, next) => {
     passport.authenticate('local.signin', {
-        successRedirect: '/profile',
+        successRedirect: '/dashboard',
         failureRedirect: '/signin',
         failureFlash: true
     })(req, res, next);
 })
 
-router.get('/profile', isLoggedIn, (req, res) => {
-    res.render('profile');
-});
 
 router.get('/logout', isLoggedIn, (req, res) => {
     req.logOut();
