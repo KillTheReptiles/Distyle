@@ -38,9 +38,9 @@
     background-color: var(--dt-background-color-container);
     border-radius: var(--dt-border-radius);
     color: var(--dt-text-color);
-    width: 600px;
+    width: 1100px;
     margin: 0 auto;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .datatable-container .header-tools{
